@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: ./desafio1
+      dockerfile: Dockerfile
+    container_name: desafio_app
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./desafio1:/app
+    command: tail -f /dev/null
