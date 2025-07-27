@@ -1,20 +1,20 @@
 CREATE TABLE Restaurantes (
     restaurante_id INT IDENTITY(1,1) PRIMARY KEY,
-    loc_ref NVARCHAR(255) NOT NULL
+    loc_ref VARCHAR(255) NOT NULL
 );
 GO
 
 CREATE TABLE Funcionarios (
     funcionario_id INT IDENTITY(1,1) PRIMARY KEY,
     numero_funcionario INT NOT NULL,
-    nome_completo NVARCHAR(255),
-    cargo NVARCHAR(100)
+    nome_completo VARCHAR(255),
+    cargo VARCHAR(100)
 );
 GO
 
 CREATE TABLE Formas_Pagamento_Catalogo (
     forma_pagamento_id INT IDENTITY(1,1) PRIMARY KEY,
-    nome NVARCHAR(100) NOT NULL,
+    nome VARCHAR(100) NOT NULL,
     ativo BIT NOT NULL DEFAULT 1,
     cobra_taxa BIT NOT NULL DEFAULT 0
 );
@@ -23,9 +23,9 @@ GO
 CREATE TABLE Erros_Catalogo (
     erro_id INT IDENTITY(1,1) PRIMARY KEY,
     codigo_erro INT UNIQUE NOT NULL,
-    descricao_curta NVARCHAR(100),
-    mensagem_detalhada NVARCHAR(500),
-    tipo_erro NVARCHAR(50)
+    descricao_curta VARCHAR(100),
+    mensagem_detalhada VARCHAR(500),
+    tipo_erro VARCHAR(50)
 );
 GO
 
@@ -41,7 +41,7 @@ CREATE TABLE Pedidos (
     total_pedido DECIMAL(10, 2),
     total_desconto DECIMAL(10, 2),
     total_pago DECIMAL(10, 2),
-    numero_mesa NVARCHAR(50)
+    numero_mesa VARCHAR(50)
 );
 GO
 
@@ -62,7 +62,7 @@ CREATE TABLE Linhas_Detalhe (
     data_detalhe_utc DATETIMEOFFSET,
     total_liquido DECIMAL(10, 2),
     quantidade DECIMAL(10, 2),
-    tipo_detalhe NVARCHAR(50) NOT NULL,
+    tipo_detalhe VARCHAR(50) NOT NULL,
     id_detalhe_especifico BIGINT NOT NULL
 );
 GO
@@ -72,21 +72,21 @@ CREATE TABLE Detalhe_ItemMenu (
     numero_item_menu INT,
     modificado BIT,
     imposto_incluso DECIMAL(10, 5),
-    impostos_ativos NVARCHAR(255),
+    impostos_ativos VARCHAR(255),
     nivel_preco INT
 );
 GO
 
 CREATE TABLE Detalhe_Desconto (
     desconto_detalhe_id INT IDENTITY(1,1) PRIMARY KEY,
-    motivo_desconto NVARCHAR(255),
+    motivo_desconto VARCHAR(255),
     valor_desconto DECIMAL(10, 2)
 );
 GO
 
 CREATE TABLE Detalhe_TaxaServico (
     taxa_servico_detalhe_id INT IDENTITY(1,1) PRIMARY KEY,
-    tipo_taxa NVARCHAR(100),
+    tipo_taxa VARCHAR(100),
     valor_taxa DECIMAL(10, 2)
 );
 GO
@@ -101,7 +101,7 @@ GO
 CREATE TABLE Detalhe_Erro (
     erro_detalhe_id INT IDENTITY(1,1) PRIMARY KEY,
     erro_id_fk INT NOT NULL,
-    detalhes_adicionais NVARCHAR(MAX)
+    detalhes_adicionais VARCHAR(500)
 );
 GO
 
