@@ -17,7 +17,7 @@ services:
     container_name: desafio_db
     environment:
       - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=cblab123
+      - MSSQL_SA_PASSWORD=CocoBambuCBLAB123@@
     ports:
       - "1433:1433"
     volumes:
