@@ -65,9 +65,16 @@ Neste ponto, o ambiente está 100% configurado com a infraestrutura pronta.
 O processo de ETL é executado através de um script Python localizado dentro do container da aplicação. Para executá-lo, utilize o seguinte comando:
 
 ```bash
-docker exec -it desafio_app python /app/src/main.py
+docker exec -it desafio_app python desafio1/src/etl-prod/main.py
 ```
 ---
+
+**Para testar com novos dados:**
+1.  Adicione um novo arquivo JSON (ou uma cópia do `ERP.json` com um nome diferente) na pasta `desafio1/etl-prod/input_files/`.
+2.  Para facilitar, adicionei uma pasta `sample-data`, dentro da pasta `desafio1`, contendo alguns arquivos json para teste. Copie e cole os arquivos json que quiser testar na pasta `input_files`.
+3.  Execute o comando de ETL abaixo.
+
+O script irá processar todos os arquivos na pasta de entrada, inserindo novos pedidos e atualizando os existentes se um ID de pedido for repetido.
 
 ## 📖 Visualizando a Análise e Documentação
 
