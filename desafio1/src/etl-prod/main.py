@@ -32,5 +32,5 @@ def run_silver_to_gold_pipeline(silver_folder_path):
     print("===== PIPELINE DE ETL (SILVER -> GOLD) FINALIZADO =====")
 
 if __name__ == "__main__":
-    SILVER_INPUT_FOLDER = "/app/data-lake/silver/getGuestChecks" 
+    SILVER_INPUT_FOLDER = "/app/data-lake/silver/res/getGuestChecks" 
     run_silver_to_gold_pipeline(SILVER_INPUT_FOLDER)

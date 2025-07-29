@@ -1,10 +1,76 @@
 {
-    "endpoint": "/res/getGuestChecks",
-    "storeId": "777 CB CB",
-    "status": "success",
-    "data": [],
-    "payload_used": {
-        "storeId": "777 CB CB",
-        "busDt": "2025-01-01"
-    }
+    "curUTC": "2025-05-05T06:06:06",
+    "locRef": "777 CB CB",
+    "guestChecks": [
+        {
+            "guestCheckId": 112233235,
+            "chkNum": 9999,
+            "opnBusDt": "2025-01-01",
+            "opnUTC": "2025-01-01T09:09:09",
+            "opnLcl": "2025-01-01T06:09:09",
+            "clsdBusDt": "2025-01-01",
+            "clsdUTC": "2025-01-01T12:12:12",
+            "clsdLcl": "2025-01-01T09:12:12",
+            "lastTransUTC": "2025-01-01T12:12:12",
+            "lastTransLcl": "2025-01-01T09:12:12",
+            "lastUpdatedUTC": "2025-01-01T13:13:13",
+            "lastUpdatedLcl": "2025-01-01T10:13:13",
+            "clsdFlag": true,
+            "gstCnt": 1,
+            "subTtl": 150.8,
+            "nonTxblSlsTtl": null,
+            "chkTtl": 150.8,
+            "dscTtl": -10,
+            "payTtl": 150.8,
+            "balDueTtl": null,
+            "rvcNum": 101,
+            "otNum": 1,
+            "ocNum": null,
+            "tblNum": 1,
+            "tblName": "80",
+            "empNum": 77777,
+            "numSrvcRd": 3,
+            "numChkPrntd": 2,
+            "taxes": [
+                {
+                    "taxNum": 21,
+                    "txblSlsTtl": 200.8,
+                    "taxCollTtl": 25.99,
+                    "taxRate": 11,
+                    "type": 2
+                }
+            ],
+            "detailLines": [
+                {
+                    "guestCheckLineItemId": 77777777,
+                    "rvcNum": 123,
+                    "dtlOtNum": 1,
+                    "dtlOcNum": null,
+                    "lineNum": 1,
+                    "dtlId": 1,
+                    "detailUTC": "2025-01-01T09:09:09",
+                    "detailLcl": "2025-01-01T06:09:09",
+                    "lastUpdateUTC": "2025-11-01T10:10:10",
+                    "lastUpdateLcl": "2025-01-01T07:10:10",
+                    "busDt": "2025-01-01",
+                    "wsNum": 7,
+                    "dspTtl": 119.9,
+                    "dspQty": 1,
+                    "aggTtl": 119.9,
+                    "aggQty": 1,
+                    "chkEmpId": 10454318,
+                    "chkEmpNum": 81001,
+                    "svcRndNum": 1,
+                    "seatNum": 1,
+                    "menuItem": {
+                        "miNum": 6042,
+                        "modFlag": false,
+                        "inclTax": 20.809091,
+                        "activeTaxes": "28",
+                        "prcLvl": 3
+                    }
+                }
+            ]
+        }
+    ]
 }
