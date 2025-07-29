@@ -1,13 +1,13 @@
 services:
   app:
     build:
-      context: ./desafio1
+      context: .
       dockerfile: Dockerfile
     container_name: desafio_app
     ports:
       - "8888:8888"
     volumes:
-      - ./desafio1:/app
+      - .:/app
     command: tail -f /dev/null
     depends_on:
       - db
