@@ -1,0 +1,10 @@
+{
+    "endpoint": "/trans/getTransactions",
+    "storeId": "99 CB CB",
+    "status": "success",
+    "data": [],
+    "payload_used": {
+        "storeId": "99 CB CB",
+        "busDt": "2024-01-01"
+    }
+}

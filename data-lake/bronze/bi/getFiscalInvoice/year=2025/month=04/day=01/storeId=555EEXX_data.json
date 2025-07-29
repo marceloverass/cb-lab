@@ -1,0 +1,10 @@
+{
+    "endpoint": "/bi/getFiscalInvoice",
+    "storeId": "555 EE XX",
+    "status": "success",
+    "data": [],
+    "payload_used": {
+        "storeId": "555 EE XX",
+        "busDt": "2025-04-01"
+    }
+}

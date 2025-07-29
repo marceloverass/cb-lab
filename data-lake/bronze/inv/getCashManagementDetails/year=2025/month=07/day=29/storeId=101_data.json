@@ -1,0 +1,10 @@
+{
+    "endpoint": "/inv/getCashManagementDetails",
+    "storeId": "101",
+    "status": "success",
+    "data": [],
+    "payload_used": {
+        "busDt": "2025-07-29",
+        "storeId": "101"
+    }
+}
