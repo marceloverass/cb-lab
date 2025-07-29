@@ -1,35 +1,25 @@
-# desafio1/etl-prod/main.py
-import os # <-- CORREÇÃO AQUI
+
+import os
 from connection import get_connection
-from load_data import load_all_data
+from load_data import load_silver_to_gold
 from validate_data import validate_data
 
-def run_production_etl_pipeline(input_folder_path):
+def run_silver_to_gold_pipeline(silver_folder_path):
     """
-    Orquestra a execução do pipeline de ETL em modo de produção (incremental).
-    Processa TODOS os arquivos .json encontrados na pasta de entrada.
+    Orquestra a execução do pipeline de ETL final, movendo os dados
+    da camada Silver (Parquet) para a camada Gold (SQL Server).
     """
-    print("===== INICIANDO PIPELINE DE ETL EM MODO DE PRODUÇÃO =====")
+    print("===== INICIANDO PIPELINE DE ETL (SILVER -> GOLD) =====")
     
-    try:
-        json_files = [f for f in os.listdir(input_folder_path) if f.endswith('.json')]
-        if not json_files:
-            print(f"AVISO: Nenhum arquivo .json encontrado em '{input_folder_path}'. Encerrando.")
-            return
-        print(f"Arquivos a serem processados: {json_files}")
-    except FileNotFoundError:
-        print(f"ERRO CRÍTICO: A pasta de entrada '{input_folder_path}' não foi encontrada. Encerrando.")
-        return
-
     connection = None
     try:
         connection = get_connection()
         
         if connection:
-            for file_name in json_files:
-                file_path = os.path.join(input_folder_path, file_name)
-                load_all_data(connection, file_path)
+
+            load_silver_to_gold(connection, silver_folder_path)
             
+            print("\n--- Iniciando Validação Final na Camada Gold ---")
             validate_data(connection)
             
     except Exception as e:
@@ -39,8 +29,8 @@ def run_production_etl_pipeline(input_folder_path):
             connection.close()
             print("\nConexão com o banco de dados fechada.")
             
-    print("===== PIPELINE DE ETL FINALIZADO =====")
+    print("===== PIPELINE DE ETL (SILVER -> GOLD) FINALIZADO =====")
 
 if __name__ == "__main__":
-    INPUT_FOLDER = 'desafio1/src/etl-prod/input_files' 
-    run_production_etl_pipeline(INPUT_FOLDER)
+    SILVER_INPUT_FOLDER = "/app/data-lake/silver/getGuestChecks" 
+    run_silver_to_gold_pipeline(SILVER_INPUT_FOLDER)
