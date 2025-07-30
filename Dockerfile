@@ -8,7 +8,7 @@ RUN apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql18 unixodbc-dev
 
 WORKDIR /app
 
-COPY docker/requirements.txt .
+COPY requirements.txt .
 
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
