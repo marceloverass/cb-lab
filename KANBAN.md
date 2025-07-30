@@ -1,8 +1,0 @@
-# Kanban Desafio Engenharia de Dados CB LAB
-
-
-Este documento acompanha o progresso das tarefas para a solução dos Desafios 1 e 2.
-
-| A Fazer (To Do) | Em Andamento (In Progress) | Feito (Done) |
-| --- | --- | --- |
-|  | <ul><li>[ ] **Desafio 2:** Documentar a estratégia do Data Lake e a resposta sobre evolução de schema.</li></ul> | <ul><li>✅ **Desafio 2:** Desenvolver script Python para consumir os 5 endpoints da API.</li><li>✅ **Desafio 2:** Implementar a lógica para salvar as respostas JSON na estrutura do Data Lake.</li><li>✅ **Desafio 1:** Implementar o script ETL para ler o JSON do `getGuestChecks` (a partir do Data Lake) e popular as tabelas de catálogo no SQL Server.</li><li>✅ **Desafio 1:** Implementar a lógica ETL para a hierarquia polimórfica (`Linhas_Detalhe`).</li><li>✅ **Desafio 1:** Validar a integridade dos dados no SQL Server após o ETL.</li><li>✅ Analisar requisitos dos Desafios 1 e 2.</li><li>✅ Configurar ambiente de desenvolvimento com Docker e Docker Compose.</li><li>✅ Desenvolver Modelo Conceitual (MER) para o Desafio 1.</li><li>✅ Desenvolver Modelo Lógico (DER) com atributos e tipos de dados.</li><li>✅ Configurar container do SQL Server no ambiente Docker.</li><li>✅ Escrever Modelo Físico (script `schema.sql`).</li><li>✅ Criar a estrutura do Data Warehouse (banco de dados e tabelas) no SQL Server.</li><li>✅ Documentar processo de modelagem no Jupyter Notebook.</li><li>✅ Criar `README.md` com instruções de execução.</li><ul> |
