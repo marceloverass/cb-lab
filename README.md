@@ -7,6 +7,10 @@ Para facilitar a avaliação, as soluções para cada um dos desafios foram docu
 * **[📄 Notebook da Solução do Desafio 1](https://github.com/marceloverass/cb-lab/blob/main/docs/notebooks/desafio1.ipynb)**
 * **[📄 Notebook da Solução do Desafio 2](https://github.com/marceloverass/cb-lab/blob/main/docs/notebooks/desafio2.ipynb)**
 
+Para dar visibilidade ao processo de desenvolvimento, todo o gerenciamento do projeto foi organizado em um quadro Kanban, que detalha o fluxo de trabalho, o controle de tarefas e o progresso desde a concepção até a entrega final.
+
+* **[Kanban](https://github.com/marceloverass/cb-lab/blob/main/docs/KANBAN.md)**
+
 ## Descrição
 
 Este projeto implementa um pipeline de dados completo que ingere dados de uma fonte externa (API), processa-os através de múltiplas camadas (Bronze, Silver e Gold) e os armazena em um Data Warehouse no SQL Server. Todo o ambiente, incluindo a aplicação Python e o banco de dados, é orquestrado com Docker.
@@ -92,6 +96,8 @@ Com o ambiente pronto, execute cada etapa do pipeline de dados. Os scripts Pytho
 
 **4.1. Etapa 1: Ingestão da API para a Camada Bronze**
 
+(Se quiser testar essa etapa do zero delete a pasta `data-lake`).
+
 ```bash
 docker exec -it desafio_app python desafio2/src/ingestao_api.py
 ```
@@ -119,7 +125,7 @@ Após a execução do pipeline, você pode verificar o resultado, testar consult
 Primeiro, acesse o terminal interativo (shell) do contêiner desafio_app. Todos os comandos seguintes serão executados de dentro dele.
 
 ```bash
-`docker compose exec desafio_app bash`
+docker compose exec app bash
 ```
 
 **5.2. Iniciar o Jupyter Notebook**
@@ -127,7 +133,7 @@ Primeiro, acesse o terminal interativo (shell) do contêiner desafio_app. Todos 
 Execute o comando abaixo no seu terminal. Ele iniciará um servidor Jupyter dentro do contêiner da aplicação e fornecerá um link de acesso.
 
 ```bash
-docker exec -it desafio_app jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root --no-browser
+jupyter lab --notebook-dir=/app/docs/notebooks --ip=0.0.0.0 --port=8888 --allow-root --no-browser
 ```
 
 **5.3. Acessar o Notebook**
@@ -135,7 +141,7 @@ docker exec -it desafio_app jupyter notebook --ip=0.0.0.0 --port=8888 --allow-ro
 O terminal exibirá uma mensagem com um link. Segure `Ctrl` e clique no link que contém `127.0.0.1:8888` ou cole-o no seu navegador. O link será parecido com este:
 
 ```
-[http://127.0.0.1:8888/tree?token=SEU_TOKEN_SECRETO_AQUI](http://127.0.0.1:8888/tree?token=SEU_TOKEN_SECRETO_AQUI)
+http://127.0.0.1:8888/lab?token=6c5e1e729cf9c39dd12c7e1c51acc87237b1a87f41756131
 ```
 
 **5.4. Executar o Notebook**
@@ -149,14 +155,6 @@ Quando terminar a avaliação, você pode parar e remover todos os contêineres 
 ```bash
 docker compose down
 ```
-
-### 7 Gerenciamento do Projeto com Kanban
-
-Para garantir a organização, o planejamento e a visibilidade do progresso durante o desenvolvimento deste projeto, utilizei um quadro Kanban.
-
-O quadro detalha todas as etapas do projeto, desde a concepção e configuração do ambiente até a implementação de cada fase da pipeline de dados e a documentação final. Ele serve como um registro transparente do fluxo de trabalho e das tarefas concluídas.
-
-* **[Kanban](https://github.com/marceloverass/cb-lab/blob/main/docs/KANBAN.md)**
 
 ## Autor
 
