@@ -1,0 +1,10 @@
+{
+    "endpoint": "/org/getChargeBack",
+    "storeId": "666 PP VV",
+    "status": "success",
+    "data": [],
+    "payload_used": {
+        "storeId": "666 PP VV",
+        "busDt": "2025-06-30"
+    }
+}

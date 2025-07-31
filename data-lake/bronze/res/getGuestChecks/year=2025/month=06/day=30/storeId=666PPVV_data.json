@@ -1,0 +1,76 @@
+{
+    "curUTC": "2025-07-29T01:05:00",
+    "locRef": "666 PP VV",
+    "guestChecks": [
+        {
+            "guestCheckId": 101112131,
+            "chkNum": 9990,
+            "opnBusDt": "2025-06-30",
+            "opnUTC": "2025-06-30T00:00:00",
+            "opnLcl": "2025-06-29T21:00:00",
+            "clsdBusDt": "2025-06-30",
+            "clsdUTC": "2025-06-30T01:00:00",
+            "clsdLcl": "2025-06-29T22:00:00",
+            "lastTransUTC": "2025-06-30T01:00:00",
+            "lastTransLcl": "2025-06-29T22:00:00",
+            "lastUpdatedUTC": "2025-06-30T01:05:00",
+            "lastUpdatedLcl": "2025-06-29T22:05:00",
+            "clsdFlag": true,
+            "gstCnt": 6,
+            "subTtl": 375.0,
+            "nonTxblSlsTtl": null,
+            "chkTtl": 375.0,
+            "dscTtl": -25.0,
+            "payTtl": 375.0,
+            "balDueTtl": 0,
+            "rvcNum": 303,
+            "otNum": 10,
+            "ocNum": 5,
+            "tblNum": 25,
+            "tblName": "VIP1",
+            "empNum": 123456,
+            "numSrvcRd": 4,
+            "numChkPrntd": 2,
+            "taxes": [
+                {
+                    "taxNum": 50,
+                    "txblSlsTtl": 375.0,
+                    "taxCollTtl": 45.0,
+                    "taxRate": 12,
+                    "type": 1
+                }
+            ],
+            "detailLines": [
+                {
+                    "guestCheckLineItemId": 90909090,
+                    "rvcNum": 159,
+                    "dtlOtNum": 10,
+                    "dtlOcNum": 5,
+                    "lineNum": 1,
+                    "dtlId": 10,
+                    "detailUTC": "2025-06-30T00:05:00",
+                    "detailLcl": "2025-06-29T21:05:00",
+                    "lastUpdateUTC": "2025-06-30T00:10:00",
+                    "lastUpdateLcl": "2025-06-29T21:10:00",
+                    "busDt": "2025-06-30",
+                    "wsNum": 6,
+                    "dspTtl": 375.0,
+                    "dspQty": 1,
+                    "aggTtl": 375.0,
+                    "aggQty": 1,
+                    "chkEmpId": 30303030,
+                    "chkEmpNum": 90001,
+                    "svcRndNum": 1,
+                    "seatNum": 6,
+                    "menuItem": {
+                        "miNum": 8888,
+                        "modFlag": true,
+                        "inclTax": 45.0,
+                        "activeTaxes": "50",
+                        "prcLvl": 5
+                    }
+                }
+            ]
+        }
+    ]
+}
