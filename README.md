@@ -1,91 +1,166 @@
-# Desafio de Engenharia de Dados
+# Desafio Engenharia de Dados
 
-Este repositório contém a solução completa para os desafios de Engenharia de Dados propostos. O projeto implementa um pipeline de dados de ponta a ponta, desde a ingestão de dados de APIs até a sua disponibilização em um Data Warehouse modelado para análises de negócio.
+## Resolução dos Desafios
 
-## Arquitetura da Solução
+Para facilitar a avaliação, as soluções para cada um dos desafios foram documentadas em Jupyter Notebooks separados. Cada notebook contém a análise detalhada e as respostas para as questões propostas.
 
-A solução foi projetada utilizando a **Arquitetura Medallion**, um padrão moderno que organiza os dados em três camadas lógicas de qualidade, garantindo robustez, rastreabilidade e flexibilidade ao fluxo de dados.
+* **[📄 Notebook da Solução do Desafio 1](https://github.com/marceloverass/cb-lab/blob/main/docs/notebooks/desafio1.ipynb)**
+* **[📄 Notebook da Solução do Desafio 2](https://github.com/marceloverass/cb-lab/blob/main/docs/notebooks/desafio2.ipynb)**
 
-Todo o ambiente é 100% containerizado com Docker para garantir a total reprodutibilidade.
+## Descrição
+
+Este projeto implementa um pipeline de dados completo que ingere dados de uma fonte externa (API), processa-os através de múltiplas camadas (Bronze, Silver e Gold) e os armazena em um Data Warehouse no SQL Server. Todo o ambiente, incluindo a aplicação Python e o banco de dados, é orquestrado com Docker.
+
+O objetivo é demonstrar habilidades em engenharia de dados, modelagem e arquitetura de dados, ETL, automação de processos e organização de um ambiente de desenvolvimento reproduzível.
 
 ## Tecnologias Utilizadas
 
-* **Linguagem:** Python
-* **Bibliotecas:** Pandas, PyArrow, PyODBC
-* **Containerização:** Docker & Docker Compose
+* **Linguagem:** Python 3.10
 * **Banco de Dados:** Microsoft SQL Server
-* **Documentação:** Jupyter Notebook, Kanban
+* **Conteinerização:** Docker & Docker Compose
+* **Bibliotecas Principais:**
+    * Pandas
+    * SQLAlchemy
+    * PyODBC
 
----
+## Pré-requisitos
 
-## 🚀 Como Executar o Projeto
+Antes de começar, garanta que você tenha as seguintes ferramentas instaladas em sua máquina:
 
-### Pré-requisitos
+* [Git](https://git-scm.com/)
+* [Docker](https://www.docker.com/products/docker-desktop/)
+* [Docker Compose](https://docs.docker.com/compose/install/)
 
-* Docker e Docker Compose devem estar instalados e em execução.
-* Git para clonar o repositório.
+## Como Executar o Projeto
 
-### Passo 1: Clone o Repositório
+Siga os passos abaixo na ordem correta. Cada comando foi preparado para ser copiado e colado diretamente no seu terminal.
+
+### 1. Clonar o Repositório
+
+Primeiro, clone este repositório para a sua máquina local e navegue até a pasta do projeto.
 
 ```bash
-git clone [https://github.com/marceloverass/cb-lab]
-cd [cb-lab]
+# Clone o projeto
+git clone https://github.com/marceloverass/cb-lab
+
+# Entre na pasta do projeto
+cd cb-lab
 ```
 
-### Passo 2: Inicie o Ambiente Docker
+### 2. Iniciar os Contêineres
 
-Este comando utiliza os arquivos de configuração na pasta `docker/` para construir a imagem da aplicação Python e iniciar os containers da aplicação (`desafio_app`) e do banco de dados (`desafio_db`).
+Este comando irá construir as imagens Docker e iniciar os serviços da aplicação e do banco de dados em segundo plano (`-d`).
 
 ```bash
-docker compose -f docker/docker-compose.yml up --build -d
+docker compose up --build -d
 ```
-**Importante:** Após executar o comando, aguarde de **1 a 2 minutos** para que o serviço do SQL Server seja totalmente inicializado antes de prosseguir.
 
-### Passo 3: Execute o Pipeline de Dados Completo
+Após a execução, verifique se os dois contêineres (`desafio_app` e `desafio_db`) estão em execução e saudáveis:
 
-Os comandos abaixo devem ser executados em sequência. Eles irão inicializar o banco de dados (se necessário) e executar todo o fluxo de dados através das camadas Bronze, Silver e Gold.
-
-**3.1 - Setup do Banco de Dados (só precisa rodar uma vez):**
 ```bash
-# Cria o Banco de Dados
+# Deve listar os dois contêineres com o status "Up"
+docker ps
+```
+
+### 3. Configurar o Banco de Dados
+
+Os comandos a seguir preparam o banco de dados `DesafioDB` e criam as tabelas necessárias.
+
+**3.1. Criar o Banco de Dados**
+Este comando executa um script SQL dentro do contêiner do banco de dados para criar a base `DesafioDB`, caso ela não exista.
+
+```bash
 docker exec -it desafio_db /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'CocoBambuCBLAB123@@' -N -C -Q "IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'DesafioDB') CREATE DATABASE DesafioDB;"
+```
 
-# Copia e executa o script para criar as tabelas
+**3.2. Criar as Tabelas**
+Agora, copiamos o arquivo `schema.sql` para dentro do contêiner e o executamos para criar a estrutura de tabelas.
+
+```bash
+# 1. Copia o arquivo de schema para o contêiner
 docker cp desafio1/sql/schema.sql desafio_db:/tmp/schema.sql
+```
+
+```bash
+# 2. Executa o script para criar as tabelas dentro do banco DesafioDB
 docker exec -it desafio_db /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'CocoBambuCBLAB123@@' -N -C -d DesafioDB -i /tmp/schema.sql
 ```
 
-**3.2 - Execução do Pipeline de Dados:**
+### 4. Executar o Pipeline de Dados
+
+Com o ambiente pronto, execute cada etapa do pipeline de dados. Os scripts Python serão executados dentro do contêiner da aplicação.
+
+**4.1. Etapa 1: Ingestão da API para a Camada Bronze**
+
 ```bash
-# Etapa 1: Ingestão da API para a camada Bronze
 docker exec -it desafio_app python desafio2/src/ingestao_api.py
+```
 
-# Etapa 2: Transformação de Bronze para Silver
+**4.2. Etapa 2: Transformação de Bronze para Silver**
+
+```bash
 docker exec -it desafio_app python desafio1/src/etl-prod/transform_silver.py
+```
 
-# Etapa 3: Carga de Silver para Gold (Data Warehouse)
+**4.3. Etapa 3: Carga de Silver para Gold (Data Warehouse)**
+
+```bash
 docker exec -it desafio_app python desafio1/src/etl-prod/main.py
 ```
 
-Após a execução, o Data Warehouse estará populado e pronto para ser consultado.
+Ao final desta etapa, o processo estará completo!
 
----
-## 📄 Visualizando a Documentação e Análise
+### 5. Verificando o Resultado
 
-Todo o processo de design e modelagem foi documentado em Jupyter Notebooks.
+Após a execução do pipeline, você pode verificar o resultado, testar consultas criadas como exemplo e criar suas próprias consultas:
 
-**1. Inicie o servidor JupyterLab:**
+**5.1. Acessar o Contêiner da Aplicação**
+
+Primeiro, acesse o terminal interativo (shell) do contêiner desafio_app. Todos os comandos seguintes serão executados de dentro dele.
+
 ```bash
-# Entra no terminal do container da aplicação
-docker compose -f docker/docker-compose.yml exec app bash
-
-# Dentro do container, executa o JupyterLab
-jupyter lab --ip=0.0.0.0 --allow-root --port=8888 --no-browser --notebook-dir=/app/docs/notebooks
+`docker compose exec desafio_app bash`
 ```
 
-**2. Acesse no Navegador:**
-Copie o link que aparecerá no terminal (incluindo o `token`) e cole no seu navegador.
+**5.2. Iniciar o Jupyter Notebook**
 
-**3. Documentação Adicional:**
-* **Gestão de Tarefas:** O progresso do projeto foi acompanhado através do arquivo `docs/KANBAN.md`.
-* **Diagramas de Modelo:** Os diagramas MER e DER estão localizados na pasta `docs/`.
+Execute o comando abaixo no seu terminal. Ele iniciará um servidor Jupyter dentro do contêiner da aplicação e fornecerá um link de acesso.
+
+```bash
+docker exec -it desafio_app jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root --no-browser
+```
+
+**5.3. Acessar o Notebook**
+
+O terminal exibirá uma mensagem com um link. Segure `Ctrl` e clique no link que contém `127.0.0.1:8888` ou cole-o no seu navegador. O link será parecido com este:
+
+```
+[http://127.0.0.1:8888/tree?token=SEU_TOKEN_SECRETO_AQUI](http://127.0.0.1:8888/tree?token=SEU_TOKEN_SECRETO_AQUI)
+```
+
+**5.4. Executar o Notebook**
+
+Na interface do Jupyter, navegue até a pasta `desafio1/notebooks/` e abra o arquivo `exploracao_datawarehouse.ipynb`. Siga as instruções e execute as células do notebook para ver a análise dos dados.
+
+### 6. Encerrar o Ambiente
+
+Quando terminar a avaliação, você pode parar e remover todos os contêineres e redes criados pelo projeto com um único comando:
+
+```bash
+docker compose down
+```
+
+### 7 Gerenciamento do Projeto com Kanban
+
+Para garantir a organização, o planejamento e a visibilidade do progresso durante o desenvolvimento deste projeto, utilizei um quadro Kanban.
+
+O quadro detalha todas as etapas do projeto, desde a concepção e configuração do ambiente até a implementação de cada fase da pipeline de dados e a documentação final. Ele serve como um registro transparente do fluxo de trabalho e das tarefas concluídas.
+
+* **[Kanban](https://github.com/marceloverass/cb-lab/blob/main/docs/KANBAN.md)**
+
+## Autor
+
+**[Marcelo Antonino Veras Sampaio]**
+
+* [marceloantonino.verass@gmail.com]
+* [https://www.linkedin.com/in/marceloveras/]
